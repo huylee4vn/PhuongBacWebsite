@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhuongBac.Web", "PhuongBac.Web\PhuongBac.Web.csproj", "{0BB479D4-278E-4818-8419-D5D89525D1AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhuongBac.Web", "PhuongBac.Web\PhuongBac.Web.csproj", "{0BB479D4-278E-4818-8419-D5D89525D1AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9538C6D3-1903-4E20-89F3-465FA51A1FEE}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
