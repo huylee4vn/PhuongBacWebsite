@@ -10,7 +10,7 @@ using PhuongBac.Data.EF;
 namespace PhuongBac.Data.Migrations
 {
     [DbContext(typeof(PhuongBacDbContext))]
-    [Migration("20221126094253_Initial")]
+    [Migration("20221126170904_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,23 @@ namespace PhuongBac.Data.Migrations
                     b.HasKey("Key");
 
                     b.ToTable("AppConfigs");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "HomeTitle",
+                            Value = "This is Home title"
+                        },
+                        new
+                        {
+                            Key = "HomeDescription",
+                            Value = "This is Home description"
+                        },
+                        new
+                        {
+                            Key = "HomeKeyword",
+                            Value = "This is Home keyword"
+                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Category", b =>
@@ -74,6 +91,75 @@ namespace PhuongBac.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Giới thiệu",
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Giới thiệu chung",
+                            ParentId = 1,
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Cơ sở vật chất",
+                            ParentId = 1,
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Thư viện",
+                            ParentId = 1,
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Chuyên khoa",
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Dịch vụ",
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Tin tức",
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Liên hệ",
+                            SortOrder = 1,
+                            Status = 0,
+                            Target = 0
+                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Contact", b =>
@@ -140,13 +226,11 @@ namespace PhuongBac.Data.Migrations
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Language", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IsDefault")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -156,6 +240,20 @@ namespace PhuongBac.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "vi-VN",
+                            IsDefault = true,
+                            Name = "Tiếng Việt"
+                        },
+                        new
+                        {
+                            Id = "en-US",
+                            IsDefault = false,
+                            Name = "English"
+                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Post", b =>
@@ -167,7 +265,7 @@ namespace PhuongBac.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CatId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -179,9 +277,6 @@ namespace PhuongBac.Data.Migrations
                         .HasMaxLength(1000);
 
                     b.Property<int>("IsHot")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RegionId")
                         .HasColumnType("int");
 
                     b.Property<int>("ShowInHome")
@@ -204,9 +299,6 @@ namespace PhuongBac.Data.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<int?>("TypeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ViewCount")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -214,9 +306,35 @@ namespace PhuongBac.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TypeId");
-
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Content = "Giới thiệu bệnh viện",
+                            Description = "Giới thiệu bệnh viện",
+                            IsHot = 0,
+                            ShowInHome = 1,
+                            SortOrder = 1,
+                            Status = 0,
+                            Title = "Giới thiệu chung",
+                            ViewCount = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Content = "Cơ sở vật chất",
+                            Description = "Cơ sở vật chất",
+                            IsHot = 0,
+                            ShowInHome = 0,
+                            SortOrder = 1,
+                            Status = 0,
+                            Title = "Cơ sở vật chất",
+                            ViewCount = 0
+                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.PostInCategory", b =>
@@ -232,6 +350,72 @@ namespace PhuongBac.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("PostInCategories");
+                });
+
+            modelBuilder.Entity("PhuongBac.Data.Entities.PostTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SeoAlias")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SeoTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Giới thiệu bệnh viện",
+                            Detail = "Giới thiệu bệnh viện",
+                            LanguageId = "vi-VN",
+                            Name = "Giới thiệu bệnh viện",
+                            PostId = 1,
+                            SeoAlias = "gioi-thieu-benh-vien",
+                            SeoTitle = "gioi-thieu-benh-vien"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "About",
+                            Detail = "Giới thiệu bệnh viện",
+                            LanguageId = "vi-VN",
+                            Name = "About",
+                            PostId = 1,
+                            SeoAlias = "about",
+                            SeoTitle = "about"
+                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Tag", b =>
@@ -269,28 +453,6 @@ namespace PhuongBac.Data.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("TagInPosts");
-                });
-
-            modelBuilder.Entity("PhuongBac.Data.Entities.Type", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Video", b =>
@@ -346,13 +508,6 @@ namespace PhuongBac.Data.Migrations
                     b.ToTable("VideoInCategories");
                 });
 
-            modelBuilder.Entity("PhuongBac.Data.Entities.Post", b =>
-                {
-                    b.HasOne("PhuongBac.Data.Entities.Type", "Type")
-                        .WithMany("Posts")
-                        .HasForeignKey("TypeId");
-                });
-
             modelBuilder.Entity("PhuongBac.Data.Entities.PostInCategory", b =>
                 {
                     b.HasOne("PhuongBac.Data.Entities.Category", "Category")
@@ -363,6 +518,15 @@ namespace PhuongBac.Data.Migrations
 
                     b.HasOne("PhuongBac.Data.Entities.Post", "Post")
                         .WithMany("PostInCategories")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PhuongBac.Data.Entities.PostTranslation", b =>
+                {
+                    b.HasOne("PhuongBac.Data.Entities.Post", "Post")
+                        .WithMany("PostTranslations")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

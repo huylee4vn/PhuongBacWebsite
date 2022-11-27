@@ -13,6 +13,10 @@
     <Compile Remove="Migrations\20221125074222_Initial.Designer.cs" />
     <Compile Remove="Migrations\20221126094057_SetMaxLength.cs" />
     <Compile Remove="Migrations\20221126094057_SetMaxLength.Designer.cs" />
+    <Compile Remove="Migrations\20221126094253_Initial.cs" />
+    <Compile Remove="Migrations\20221126094253_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20221126170131_SeedingData.cs" />
+    <Compile Remove="Migrations\20221126170131_SeedingData.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

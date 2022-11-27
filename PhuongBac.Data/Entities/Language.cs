@@ -7,8 +7,8 @@ namespace PhuongBac.Data.Entities
 {
     public class Language
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public int IsDefault { get; set; }
+        public bool IsDefault { get; set; }
     }
 }

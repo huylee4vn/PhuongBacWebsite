@@ -27,8 +27,6 @@ namespace PhuongBac.Data.Configurations
             builder.Property(x => x.ViewCount).IsRequired().HasDefaultValue(0);
             
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
-
-            builder.HasOne(x => x.Type).WithMany(t => t.Posts);
         }
     }
 }
