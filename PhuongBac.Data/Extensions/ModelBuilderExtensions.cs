@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PhuongBac.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,36 @@ namespace PhuongBac.Data.Extensions
                 new PostTranslation { Id = 1, LanguageId = "vi-VN", PostId = 1, Name = "Giới thiệu bệnh viện", Description = "Giới thiệu bệnh viện", Detail = "Giới thiệu bệnh viện", SeoTitle = "gioi-thieu-benh-vien", SeoAlias = "gioi-thieu-benh-vien" },
                 new PostTranslation { Id = 2, LanguageId = "vi-VN", PostId = 1, Name = "About", Description = "About", Detail = "Giới thiệu bệnh viện", SeoTitle = "about", SeoAlias = "about" }
                 );
+
+            var roleId = new Guid("0f8fad5b-d9cb-469f-a165-70867728950e");
+            var userId = new Guid("7c9e6679-7425-40de-944b-e07fc1f90ae7");
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = roleId,
+                Name = "admin",
+                NormalizedName = "admin",
+                Description = "Admin role"
+            });
+
+            var hasher = new PasswordHasher<AppUser>();
+            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            {
+                Id = userId,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "itpb@gmail.com",
+                NormalizedEmail = "itpb@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "123456a@"),
+                SecurityStamp = string.Empty,
+                FirstName = "Huy",
+                LastName = "Lee",
+                Dob = new DateTime(1993, 06, 30)
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+                new IdentityUserRole<Guid> { RoleId = roleId, UserId = userId }
+            );
         }
     }
 }

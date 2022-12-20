@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhuongBac.Data.EF;
 
 namespace PhuongBac.Data.Migrations
 {
     [DbContext(typeof(PhuongBacDbContext))]
-    partial class PhuongBacDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221129021717_CreateIdentityUser")]
+    partial class CreateIdentityUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,13 +94,6 @@ namespace PhuongBac.Data.Migrations
                     b.HasKey("RoleId", "UserId");
 
                     b.ToTable("AppUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"),
-                            UserId = new Guid("7c9e6679-7425-40de-944b-e07fc1f90ae7")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -176,16 +171,6 @@ namespace PhuongBac.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"),
-                            ConcurrencyStamp = "e4b0288e-6214-4edd-9323-c22e398f954f",
-                            Description = "Admin role",
-                            Name = "admin",
-                            NormalizedName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.AppUser", b =>
@@ -252,27 +237,6 @@ namespace PhuongBac.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7c9e6679-7425-40de-944b-e07fc1f90ae7"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0163faa1-73cc-4319-8df5-2cbf12d8af0a",
-                            Dob = new DateTime(1993, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "itpb@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Huy",
-                            LastName = "Lee",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "itpb@gmail.com",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIcVMlydCnzGb0lNnEszlR8X//cbkKSDUmXfAKQQUCX6SnxyT56AzrkCDBi/pGQGhg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("PhuongBac.Data.Entities.Category", b =>

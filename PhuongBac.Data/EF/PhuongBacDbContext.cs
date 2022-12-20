@@ -1,20 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PhuongBac.Data.Configurations;
 using PhuongBac.Data.Entities;
 using PhuongBac.Data.Extensions;
+using System;
 
 namespace PhuongBac.Data.EF
 {
-    public class PhuongBacDbContext : DbContext
+    public class PhuongBacDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public PhuongBacDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
             modelBuilder.ApplyConfiguration(new InsurancePartnerConfiguration());
@@ -26,6 +30,12 @@ namespace PhuongBac.Data.EF
             modelBuilder.ApplyConfiguration(new TagInPostConfiguration());
             modelBuilder.ApplyConfiguration(new VideoConfiguration());
             modelBuilder.ApplyConfiguration(new VideoInCategoryConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
 
             modelBuilder.Seed();
         }
